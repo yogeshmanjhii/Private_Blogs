@@ -8,6 +8,8 @@ const keys = require('./config/keys');
 require('./models/User');
 require('./models/Blog');
 require('./services/passport');
+require('./services/cache');
+
 
 mongoose.Promise = global.Promise;
 mongoose.connect(keys.mongoURI, { useMongoClient: true });
@@ -16,7 +18,7 @@ const app = express();
 
 app.use(bodyParser.json());
 app.use(
-  cookieSession({
+  cookieSession({ 
     maxAge: 30 * 24 * 60 * 60 * 1000,
     keys: [keys.cookieKey]
   })
